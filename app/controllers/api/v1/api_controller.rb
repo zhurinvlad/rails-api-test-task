@@ -4,6 +4,9 @@ module Api
     class ApiController < ApplicationController
       include ActionController::HttpAuthentication::Basic::ControllerMethods
       include ActionController::HttpAuthentication::Token::ControllerMethods
+      include Pundit
+
+      rescue_from Pundit::NotAuthorizedError, with: :render_access_denied
 
       before_action :authenticate_from_token!,
                     except: [:index, :show, :auth_token]
@@ -22,6 +25,12 @@ module Api
         render json: @current_user
       end
 
+      protected
+
+      def pundit_user
+        @current_user
+      end
+
       private
 
       def authenticate_from_token!
@@ -35,6 +44,11 @@ module Api
       def render_unauthorized(locale_key = 'bad_credentials')
         message = I18n.t("errors.auth.#{locale_key}")
         render json: { errors: { access: message } }, status: :unauthorized
+      end
+
+      def render_access_denied
+        message = I18n.t('errors.auth.access_denied')
+        render json: { errors: { access: message } }, status: :forbidden
       end
 
       def render_errors(obj, status: :unprocessable_entity)

@@ -12,7 +12,6 @@ RSpec.describe Api::V1::AuthorsController, type: :controller do
       json = JSON.parse(response.body)
 
       expect(response).to be_success
-
       expect(json['authors'].length).to eq(10)
     end
 
@@ -32,7 +31,6 @@ RSpec.describe Api::V1::AuthorsController, type: :controller do
           post :create, params: { author: author_attributes }
 
           expect(response).to have_http_status(:unprocessable_entity)
-
           expect(json['errors']).not_to be_nil
         end
       end
@@ -53,12 +51,15 @@ RSpec.describe Api::V1::AuthorsController, type: :controller do
   describe 'PUT/PATCH v1/authors/:id' do
     before { authenticate_from_token! }
 
-    let(:author) { create(:author, first_name: 'Andrey') }
+    let(:author) { create(:author) }
 
     context 'with valid attributes' do
       it 'updates the author' do
+        author_attributes[:first_name] = 'Maria'
         put :update, params: { id: author.id, author: author_attributes }
-        expect(author.first_name).to eq('Andrey')
+
+        expect(response).to be_success
+        expect(json['author']['first_name']).to eq('Maria')
       end
     end
 
@@ -68,7 +69,6 @@ RSpec.describe Api::V1::AuthorsController, type: :controller do
         put :update, params: { id: author.id, author: author_attributes }
 
         expect(response).to have_http_status(:unprocessable_entity)
-
         expect(json['errors']).not_to be_nil
       end
     end

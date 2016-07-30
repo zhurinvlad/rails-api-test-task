@@ -13,7 +13,6 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
       json = JSON.parse(response.body)
 
       expect(response).to be_success
-
       expect(json['reviews'].length).to eq(10)
     end
 
@@ -42,46 +41,84 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
       get :show, params: { book_id: book.id, id: review.id }
 
       expect(response).to be_success
-
       # check that the review attribute are the same.
       expect(json['review']['text']).to eq(review.text)
     end
   end
 
   describe 'PUT/PATCH v1/reviews/:id' do
-    before { authenticate_from_token! }
+    context 'admin or review author' do
+      before do
+        @authorized_user = authenticate_from_token!
+      end
 
-    let(:review) { create(:review, text: 'Awesome book!') }
+      let(:review) do
+        create(:review, user: @authorized_user)
+      end
 
-    context 'with valid attributes' do
-      it 'updates the review' do
-        put :update, params: { book_id: book.id, id: review.id,
-                               review: review_attributes }
-        expect(review.text).to eq('Awesome book!')
+      context 'with valid attributes' do
+        it 'updates the review' do
+          review_attributes[:text] = 'Awesome book!'
+          put :update, params: { book_id: book.id, id: review.id,
+                                 review: review_attributes }
+
+          expect(response).to be_success
+          expect(json['review']['text']).to eq('Awesome book!')
+        end
+      end
+
+      context 'with unvalid attributes' do
+        it 'returns errors' do
+          review_attributes[:text] = nil
+          put :update, params: { book_id: book.id, id: review.id,
+                                 review: review_attributes }
+
+          expect(response).to have_http_status(:unprocessable_entity)
+          expect(json['errors']).not_to be_nil
+        end
       end
     end
 
-    context 'with unvalid attributes' do
-      it 'returns errors' do
-        review_attributes[:text] = nil
+    context 'not admin or review author' do
+      before { authenticate_from_token! }
+
+      let(:review) { create(:review) }
+
+      it 'returns forbidden error' do
         put :update, params: { book_id: book.id, id: review.id,
                                review: review_attributes }
 
-        expect(response).to have_http_status(:unprocessable_entity)
-
-        expect(json['errors']).not_to be_nil
+        expect(response).to be_forbidden
+        expect(json['errors']['access']).not_to be_nil
       end
     end
   end
 
   describe 'DELETE v1/reviews' do
-    before { authenticate_from_token! }
+    context 'admin or review author' do
+      before do
+        @authorized_user = authenticate_from_token!
+      end
 
-    let(:review) { create(:review) }
+      let(:review) { create(:review, user: @authorized_user) }
 
-    it 'deletes the review' do
-      delete :destroy, params: { book_id: book.id, id: review.id }
-      expect(response).to be_no_content
+      it 'deletes the review' do
+        delete :destroy, params: { book_id: book.id, id: review.id }
+        expect(response).to be_no_content
+      end
+    end
+
+    context 'not admin or review author' do
+      before { authenticate_from_token! }
+
+      let(:review) { create(:review) }
+
+      it 'returns forbidden error' do
+        delete :destroy, params: { book_id: book.id, id: review.id }
+
+        expect(response).to be_forbidden
+        expect(json['errors']['access']).not_to be_nil
+      end
     end
   end
 

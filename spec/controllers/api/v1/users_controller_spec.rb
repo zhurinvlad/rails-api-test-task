@@ -12,7 +12,6 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       json = JSON.parse(response.body)
 
       expect(response).to be_success
-
       expect(json['users'].length).to eq(10)
     end
 
@@ -32,7 +31,6 @@ RSpec.describe Api::V1::UsersController, type: :controller do
           post :create, params: { user: user_attributes }
 
           expect(response).to have_http_status(:unprocessable_entity)
-
           expect(json['errors']).not_to be_nil
         end
       end
@@ -50,18 +48,22 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
       # ensure that private attributes aren't serialized
       expect(json['user']['password']).to eq(nil)
+      expect(json['user']['role']).to eq(nil)
     end
   end
 
   describe 'PUT/PATCH v1/users/:id' do
     before { authenticate_from_token! }
 
-    let(:user) { create(:user, first_name: 'Andrey') }
+    let(:user) { create(:user) }
 
     context 'with valid attributes' do
       it 'updates the user' do
+        user_attributes[:first_name] = 'Mark'
         put :update, params: { id: user.id, user: user_attributes }
-        expect(user.first_name).to eq('Andrey')
+
+        expect(response).to be_success
+        expect(json['user']['first_name']).to eq('Mark')
       end
     end
 
@@ -71,7 +73,6 @@ RSpec.describe Api::V1::UsersController, type: :controller do
         put :update, params: { id: user.id, user: user_attributes }
 
         expect(response).to have_http_status(:unprocessable_entity)
-
         expect(json['errors']).not_to be_nil
       end
     end
@@ -90,7 +91,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   describe 'strong params' do
     before { authenticate_from_token! }
-    
+
     it do
       user_params = [
         :first_name, :last_name, :email, :password, :birthday,

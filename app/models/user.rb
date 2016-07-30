@@ -7,6 +7,11 @@ class User < ApplicationRecord
 
   has_many :reviews
 
+  enum role: {
+    user:  0,
+    admin: 1
+  }
+
   # http://www.aidanf.net/posts/validating-emails-in-rails
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 

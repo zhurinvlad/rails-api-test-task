@@ -12,7 +12,6 @@ RSpec.describe Api::V1::BooksController, type: :controller do
       json = JSON.parse(response.body)
 
       expect(response).to be_success
-
       expect(json['books'].length).to eq(10)
     end
 
@@ -33,7 +32,6 @@ RSpec.describe Api::V1::BooksController, type: :controller do
           post :create, params: { book: book_attributes }
 
           expect(response).to have_http_status(:unprocessable_entity)
-
           expect(json['errors']).not_to be_nil
         end
       end
@@ -45,7 +43,6 @@ RSpec.describe Api::V1::BooksController, type: :controller do
       get :show, params: { id: book.id }
 
       expect(response).to be_success
-
       # check that the book attribute are the same.
       expect(json['book']['description']).to eq(book.description)
     end
@@ -54,12 +51,15 @@ RSpec.describe Api::V1::BooksController, type: :controller do
   describe 'PUT/PATCH v1/books/:id' do
     before { authenticate_from_token! }
 
-    let(:book) { create(:book, title: 'The RSpec Book') }
+    let(:book) { create(:book) }
 
     context 'with valid attributes' do
       it 'updates the book' do
+        book_attributes[:title] = 'The Ruby Book'
         put :update, params: { id: book.id, book: book_attributes }
-        expect(book.title).to eq('The RSpec Book')
+
+        expect(response).to be_success
+        expect(json['book']['title']).to eq('The Ruby Book')
       end
     end
 
@@ -69,7 +69,6 @@ RSpec.describe Api::V1::BooksController, type: :controller do
         put :update, params: { id: book.id, book: book_attributes }
 
         expect(response).to have_http_status(:unprocessable_entity)
-
         expect(json['errors']).not_to be_nil
       end
     end

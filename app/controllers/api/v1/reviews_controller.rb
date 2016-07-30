@@ -29,15 +29,17 @@ module Api
 
       # PATCH/PUT v1/books/:book_id/reviews/:id
       def update
-        if @review.update(review_params)
-          @review.user = @current_user
-          return render json: @review
-        end
-        render_errors @review
+        authorize @review
+
+        return render_errors @review unless @review.update(review_params)
+
+        @review.user = @current_user
+        render json: @review
       end
 
       # DELETE v1/books/:book_id/reviews/:id
       def destroy
+        authorize @review
         @review.destroy
       end
 

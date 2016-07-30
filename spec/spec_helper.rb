@@ -1,10 +1,12 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
-  add_group 'Serializers', 'app/serializers/'
-  add_group 'Concerns', 'app/models/concerns'
-  add_filter '/app/channels/'
+  add_filter '/app/channels'
   add_filter '/app/jobs'
   add_filter '/app/mailers'
+
+  add_group 'Serializers', 'app/serializers'
+  add_group 'Concerns',    'app/models/concerns'
+  add_group 'Policies',    'app/policies'
 end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
@@ -21,6 +23,7 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 require 'shoulda/callback/matchers'
 require 'timecop'
+require 'pundit/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

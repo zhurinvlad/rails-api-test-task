@@ -3,3 +3,4 @@ en:
     auth:
       bad_credentials: 'Incorrect credentials'
       invalid_token: 'Invalid token'
+      access_denied: 'Forbidden'

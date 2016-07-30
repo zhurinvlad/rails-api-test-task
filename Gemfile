@@ -42,6 +42,7 @@ group :development, :test do
 
   # Use RSpec instead of Minitest
   gem 'rspec-rails', '3.5.1'
+  gem 'rspec_junit_formatter', '0.2.2'
 
   # Use factories instead fixtures
   gem 'factory_girl_rails'

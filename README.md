@@ -12,7 +12,7 @@ API for managing books, authors, and personal reviews:
 
 See the [task description](TASK.md).
 
-API Documentation: http://docs.akrisanov1.apiary.io/
+[API specification](api_blueprint_doc.md).
 
 Application deployed on Heroku: https://bookshelfapi.herokuapp.com
 

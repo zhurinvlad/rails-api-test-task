@@ -6,11 +6,13 @@
       "type" : "object",
       "required" : [
         "id",
+        "user",
         "text"
       ],
       "properties" : {
         "id":   { "type" : "integer" },
-        "text": { "type" : "string" }
+        "text": { "type" : "string" },
+        "user": { "type" : "object" }
       }
     }
   }

@@ -16,7 +16,3 @@ echo "------------------------------------------"
 echo "[Run a static analysis security vulnerability scanner for Ruby on Rails applications]"
 brakeman -o $LINTERS_DIR/brakeman.html
 echo "------------------------------------------"
-
-echo "[Run a code metric tool to check the quality of Rails code]"
-rails_best_practices -f html --output-file $LINTERS_DIR/rails_best_practices.html
-echo "------------------------------------------"

@@ -10,10 +10,14 @@ gem 'pg'
 gem 'puma', '~> 3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
+
+# NOTE: Use AMS instead jbuilder
+gem 'active_model_serializers'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -52,7 +56,6 @@ group :development do
   ## Linters
   gem 'rubocop', require: false
   gem 'bullet'
-  gem 'rails_best_practices'
 
   gem 'bundler-audit'
   gem 'brakeman', require: false
@@ -93,7 +96,7 @@ group :test do
 
   gem 'ffaker'
   gem 'timecop'
-  gem 'webmock'
+  gem 'json-schema'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

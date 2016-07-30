@@ -62,13 +62,6 @@ E.g.: `/Users/akrisanov/.rvm/gems/ruby-2.3.1/wrappers/rubocop`.
 
 Use Bullet for N+1 queries detection.
 
-**[rails_best_practices](https://github.com/railsbp/rails_best_practices)**
-
-Checks the quality of Rails application code.
-
-* `rails_best_practices .`
-* `rails_best_practices -f html .`
-
 ## Deployment instructions
 
 * `mina deploy`

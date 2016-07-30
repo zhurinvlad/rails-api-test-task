@@ -1,5 +1,10 @@
 require 'simplecov'
-SimpleCov.start 'rails'
+SimpleCov.start 'rails' do
+  add_group 'Serializers', 'app/serializers/'
+  add_filter '/app/channels/'
+  add_filter '/app/jobs'
+  add_filter '/app/mailers'
+end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
@@ -61,8 +66,11 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  config.include FactoryGirl::Syntax::Methods
   config.include Shoulda::Callback::Matchers::ActiveModel
   config.include ActiveSupport::Testing::TimeHelpers
+  config.include Requests::JsonHelpers, type: :controller
+  config.include SerializerSpecHelper, type: :serializer
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

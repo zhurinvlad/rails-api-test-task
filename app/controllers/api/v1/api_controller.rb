@@ -5,22 +5,26 @@ module Api
       include ActionController::HttpAuthentication::Basic::ControllerMethods
       include ActionController::HttpAuthentication::Token::ControllerMethods
 
-      before_action :authenticate_from_token,
+      before_action :authenticate_from_token!,
                     except: [:index, :show, :auth_token]
 
       def auth_token
-        authenticate_with_http_basic do |email, password|
+        authorized = authenticate_with_http_basic do |email, password|
           user = User.find_by(email: email).try(:authenticate, password)
           return render_unauthorized unless user
           user.update!(auth_token: SecureRandom.hex)
-          return render json: { auth_token: user.auth_token }
+          render json: { auth_token: user.auth_token }
         end
-        render_unauthorized
+        render_unauthorized unless authorized
+      end
+
+      def authorized_user
+        render json: @current_user
       end
 
       private
 
-      def authenticate_from_token
+      def authenticate_from_token!
         authorized = authenticate_with_http_token do |token, _options|
           @current_user = User.find_by(auth_token: token)
         end

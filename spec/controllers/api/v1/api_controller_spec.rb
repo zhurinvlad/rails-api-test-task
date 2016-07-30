@@ -25,5 +25,31 @@ RSpec.describe Api::V1::ApiController, type: :controller do
         end
       end
     end
+
+    describe 'GET v1/authorized_user' do
+      context 'with valid token' do
+        it 'returns the user entity' do
+          auth_token = SecureRandom.hex
+          create(:user, auth_token: auth_token)
+
+          token_auth(auth_token)
+          get :authorized_user
+
+          expect(response).to be_success
+          json = JSON.parse(response.body)
+          expect(json['user']).not_to be_nil
+        end
+      end
+
+      context 'with invalid token' do
+        it 'returns errors' do
+          get :authorized_user
+
+          expect(response).to be_unauthorized
+          json = JSON.parse(response.body)
+          expect(json['errors']['access']).not_to be_nil
+        end
+      end
+    end
   end
 end

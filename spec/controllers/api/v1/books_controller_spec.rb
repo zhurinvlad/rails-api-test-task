@@ -17,6 +17,8 @@ RSpec.describe Api::V1::BooksController, type: :controller do
     end
 
     describe 'POST v1/books' do
+      before { authenticate_from_token! }
+
       context 'with valid attributes' do
         it 'creates a new book' do
           book_attributes[:author_id] = create(:author).id
@@ -50,6 +52,8 @@ RSpec.describe Api::V1::BooksController, type: :controller do
   end
 
   describe 'PUT/PATCH v1/books/:id' do
+    before { authenticate_from_token! }
+
     let(:book) { create(:book, title: 'The RSpec Book') }
 
     context 'with valid attributes' do
@@ -72,6 +76,8 @@ RSpec.describe Api::V1::BooksController, type: :controller do
   end
 
   describe 'DELETE v1/books' do
+    before { authenticate_from_token! }
+
     let(:book) { create(:book) }
 
     it 'deletes the book' do
@@ -81,6 +87,8 @@ RSpec.describe Api::V1::BooksController, type: :controller do
   end
 
   describe 'strong params' do
+    before { authenticate_from_token! }
+
     it do
       book_params = [:isbn, :title, :description, :pages, :website, :published,
                      :author_id]

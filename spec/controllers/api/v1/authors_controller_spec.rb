@@ -17,6 +17,8 @@ RSpec.describe Api::V1::AuthorsController, type: :controller do
     end
 
     describe 'POST v1/authors' do
+      before { authenticate_from_token! }
+
       context 'with valid attributes' do
         it 'creates a new author' do
           post :create, params: { author: author_attributes }
@@ -49,6 +51,8 @@ RSpec.describe Api::V1::AuthorsController, type: :controller do
   end
 
   describe 'PUT/PATCH v1/authors/:id' do
+    before { authenticate_from_token! }
+
     let(:author) { create(:author, first_name: 'Andrey') }
 
     context 'with valid attributes' do
@@ -71,6 +75,8 @@ RSpec.describe Api::V1::AuthorsController, type: :controller do
   end
 
   describe 'DELETE v1/authors' do
+    before { authenticate_from_token! }
+
     let(:author) { create(:author) }
 
     it 'deletes the author' do
@@ -80,6 +86,8 @@ RSpec.describe Api::V1::AuthorsController, type: :controller do
   end
 
   describe 'strong params' do
+    before { authenticate_from_token! }
+
     it do
       author_params = [:first_name, :last_name, :about]
       should permit(*author_params)

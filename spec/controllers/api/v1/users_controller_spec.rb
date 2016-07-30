@@ -17,6 +17,8 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
 
     describe 'POST v1/users' do
+      before { authenticate_from_token! }
+
       context 'with valid attributes' do
         it 'creates a new user' do
           post :create, params: { user: user_attributes }
@@ -52,6 +54,8 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   end
 
   describe 'PUT/PATCH v1/users/:id' do
+    before { authenticate_from_token! }
+
     let(:user) { create(:user, first_name: 'Andrey') }
 
     context 'with valid attributes' do
@@ -74,6 +78,8 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   end
 
   describe 'DELETE v1/users' do
+    before { authenticate_from_token! }
+
     let(:user) { create(:user) }
 
     it 'deletes the user' do
@@ -83,6 +89,8 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   end
 
   describe 'strong params' do
+    before { authenticate_from_token! }
+    
     it do
       user_params = [
         :first_name, :last_name, :email, :password, :birthday,

@@ -1,5 +1,7 @@
 # README
 
+[![CircleCI](https://circleci.com/gh/akrisanov/bookshelf.svg?style=shield)](https://circleci.com/gh/akrisanov/bookshelf)
+
 Inspired from http://goodreads.com.
 API for managing books, authors, and personal bookshelves:
 
@@ -8,7 +10,7 @@ API for managing books, authors, and personal bookshelves:
 * Authorized user can create reviews on the book and update/delete only his records.
 * Authorized Admin user can manage all entities.
 
-See the [task description]('TASK.md').
+See the [task description](TASK.md).
 
 API Documentation: http://docs.akrisanov1.apiary.io/
 

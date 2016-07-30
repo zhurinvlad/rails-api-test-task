@@ -3,9 +3,9 @@
 [![CircleCI](https://circleci.com/gh/akrisanov/bookshelf.svg?style=shield)](https://circleci.com/gh/akrisanov/bookshelf)
 
 Inspired from http://goodreads.com.
-API for managing books, authors, and personal bookshelves:
+API for managing books, authors, and personal reviews:
 
-* Unauthorized user (Guest) can view books, authors, reviews, users;
+* Unauthorized user (Guest) can view books, authors, reviews, and users;
 * Authorized user can add/update/delete books and authors;
 * Authorized user can create reviews on the book and update/delete only his records.
 * Authorized Admin user can manage all entities.
@@ -13,6 +13,8 @@ API for managing books, authors, and personal bookshelves:
 See the [task description](TASK.md).
 
 API Documentation: http://docs.akrisanov1.apiary.io/
+
+Application deployed on Heroku: https://bookshelfapi.herokuapp.com
 
 ## Environment
 
@@ -76,4 +78,4 @@ Use Bullet for N+1 queries detection.
 
 ## Deployment instructions
 
-* `mina deploy`
+* `git push heroku master`

@@ -1,6 +1,7 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
   add_group 'Serializers', 'app/serializers/'
+  add_group 'Concerns', 'app/models/concerns'
   add_filter '/app/channels/'
   add_filter '/app/jobs'
   add_filter '/app/mailers'
@@ -35,7 +36,8 @@ require 'timecop'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each         { |f| require f }
+Dir[Rails.root.join('spec/models/concerns/**/*.rb')].each { |f| require f }
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.

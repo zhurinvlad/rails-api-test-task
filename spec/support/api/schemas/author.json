@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "required": ["author"],
+  "properties": {
+    "author" : {
+      "type" : "object",
+      "required" : [
+        "id",
+        "first_name",
+        "last_name",
+        "about"
+      ],
+      "properties" : {
+        "id":         { "type" : "integer" },
+        "first_name": { "type" : "string" },
+        "last_name":  { "type" : "string" },
+        "about":      { "type" : "string" }
+      }
+    }
+  }
+}

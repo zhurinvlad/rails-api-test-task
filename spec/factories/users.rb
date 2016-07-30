@@ -1,5 +1,3 @@
-require 'ffaker'
-
 FactoryGirl.define do
   factory :user do
     first_name { FFaker::NameDE.first_name }

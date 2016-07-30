@@ -1,15 +1,22 @@
 # README
 
 Inspired from http://goodreads.com.
-API for managing books, authors, and personal bookshelves.
+API for managing books, authors, and personal bookshelves:
+
+* Unauthorized user (Guest) can view books, authors, reviews, users;
+* Authorized user can add/update/delete books and authors;
+* Authorized user can create reviews on the book and update/delete only his records.
+* Authorized Admin user can manage all entities.
+
+API Documentation: http://docs.akrisanov1.apiary.io/
 
 ## Environment
 
-I prefer to use RVM and dotenv for development environment configuration.
+I prefer to use RVM and [dotenv](https://rubygems.org/gems/dotenv-rails/) for development environment configuration.
 
 ### Ruby version
 
-RVM creates gemset based on .ruby-version and .ruby-gemset: `2.3.1@bookshelf`.
+RVM creates gemset based on `.ruby-version` and `.ruby-gemset`: `2.3.1@bookshelf`.
 
 * Ruby 2.3.1
 * Rails 5.0.0
@@ -31,6 +38,7 @@ RVM creates gemset based on .ruby-version and .ruby-gemset: `2.3.1@bookshelf`.
 
 ## How to run the test suite
 
+* `RAILS_ENV=test rails db:migrate`
 * `rspec` runs tests/specs manually;
 * `guard` runs test/specs automatically & intelligently when files are modified.
 

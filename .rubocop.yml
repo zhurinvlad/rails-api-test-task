@@ -1,3 +1,15 @@
+AllCops:
+  Exclude:
+    - db/schema.rb
+
+Metrics/MethodLength:
+  Exclude:
+    - db/migrate/*.rb
+
+Style/Documentation:
+  Exclude:
+    - db/migrate/*.rb
+
 Style/FrozenStringLiteralComment:
   Enabled: false
   Exclude:

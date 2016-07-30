@@ -1,6 +1,8 @@
 # User model with roles: :admin, :user
 # Unauthorized user is a guest by default.
 class User < ApplicationRecord
+  include Nameable
+
   has_secure_password
 
   # http://www.aidanf.net/posts/validating-emails-in-rails
@@ -13,8 +15,4 @@ class User < ApplicationRecord
   validates :first_name, uniqueness: {
     scope: :last_name, case_sensitive: false
   }
-
-  def full_name
-    [first_name, last_name].compact.join(' ')
-  end
 end

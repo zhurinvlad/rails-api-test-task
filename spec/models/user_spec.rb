@@ -7,6 +7,8 @@ RSpec.describe User, type: :model do
 
   let(:user) { build(:user) }
 
+  it_behaves_like 'nameable', :user
+
   describe 'ActiveModel validations' do
     # Basic validations
     it { expect(user).to validate_presence_of(:email) }
@@ -30,34 +32,5 @@ RSpec.describe User, type: :model do
     it { expect(user).to allow_value('develop4net@ya.ru').for(:email) }
     it { expect(user).to_not allow_value('foo@bar').for(:email) }
     it { expect(user).to_not allow_value('foobar').for(:email) }
-  end
-
-  describe 'public instance methods' do
-    context 'responds to its methods' do
-      it { expect(user).to respond_to(:full_name) }
-    end
-
-    context 'executes methods correctly' do
-      context '#full_name' do
-        let(:first_name) { 'Andrey'   }
-        let(:last_name)  { 'Krisanov' }
-
-        subject(:user) do
-          build(:user, first_name: first_name, last_name: last_name)
-        end
-
-        it 'returns user full name' do
-          expect(user.full_name).to eq("#{first_name} #{last_name}")
-
-          user.first_name = first_name
-          user.last_name = nil
-          expect(user.full_name).to eq(first_name)
-
-          user.first_name = nil
-          user.last_name = last_name
-          expect(user.full_name).to eq(last_name)
-        end
-      end
-    end
   end
 end

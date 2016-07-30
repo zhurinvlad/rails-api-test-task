@@ -1,0 +1,74 @@
+# README
+
+Inspired from http://goodreads.com.
+API for managing books, authors, and personal bookshelves.
+
+## Environment
+
+I prefer to use RVM and dotenv for development environment configuration.
+
+### Ruby version
+
+RVM creates gemset based on .ruby-version and .ruby-gemset: `2.3.1@bookshelf`.
+
+* Ruby 2.3.1
+* Rails 5.0.0
+
+## Dependencies
+
+* PostgreSQL 9.4+
+
+## Configuration
+
+## Database creation
+
+* `rails db:create`
+* `rails db:migrate`
+
+## Database initialization
+
+* `rails db:seed`
+
+## How to run the test suite
+
+* `rspec` runs tests/specs manually;
+* `guard` runs test/specs automatically & intelligently when files are modified.
+
+P.S. OSX `brew install terminal-notifier`
+
+## Linters (code analyzers)
+
+```bash
+chmod +x run_all_linters.sh
+./run_all_linters
+```
+
+See `linters` dir.
+
+**[RubyCop](https://github.com/bbatsov/rubocop):**
+* [Editor integration](https://github.com/bbatsov/rubocop#editor-integration);
+* `rubocop`;
+* `rubocop --format html -o rubocop.html`.
+
+P.S. Atom: if you use RVM + Atom, your `executablePath` should include `wrappers` dir instead of `bin`.
+E.g.: `/Users/akrisanov/.rvm/gems/ruby-2.3.1/wrappers/rubocop`.
+
+**[Brakeman](https://github.com/presidentbeef/brakeman)**
+
+* `brakeman`;
+* `brakeman -o brakeman.html`.
+
+**[Bullet](https://github.com/flyerhzm/bullet)**
+
+Use Bullet for N+1 queries detection.
+
+**[rails_best_practices](https://github.com/railsbp/rails_best_practices)**
+
+Checks the quality of Rails application code.
+
+* `rails_best_practices .`
+* `rails_best_practices -f html .`
+
+## Deployment instructions
+
+* `mina deploy`

@@ -11,16 +11,18 @@
         "description",
         "pages",
         "website",
-        "published"
+        "published",
+        "author"
       ],
       "properties" : {
-        "id":          { "type" : "integer" },
-        "isbn":        { "type" : "string" },
-        "title":       { "type" : "string" },
-        "description": { "type" : "string" },
-        "pages":       { "type" : "integer" },
-        "website":     { "type" : "string" },
-        "published":   { "type" : "string", "format": "date" }
+        "id":          { "type": "integer" },
+        "isbn":        { "type": "string" },
+        "title":       { "type": "string" },
+        "description": { "type": "string" },
+        "pages":       { "type": "integer" },
+        "website":     { "type": "string" },
+        "published":   { "type": "string", "format": "date" },
+        "author":      { "type": "object" }
       }
     }
   }

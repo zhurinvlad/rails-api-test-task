@@ -19,4 +19,9 @@ RSpec.describe Author, type: :model do
         .case_insensitive
     end
   end
+
+  describe 'ActiveRecord associations' do
+    # Associations
+    it { expect(author).to have_many(:books) }
+  end
 end

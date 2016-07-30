@@ -6,5 +6,6 @@ FactoryGirl.define do
     pages       { rand(1..10_000) }
     website     { FFaker::Internet.http_url }
     published   { FFaker::Time.date }
+    author
   end
 end

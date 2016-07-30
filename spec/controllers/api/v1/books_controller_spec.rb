@@ -19,6 +19,7 @@ RSpec.describe Api::V1::BooksController, type: :controller do
     describe 'POST v1/books' do
       context 'with valid attributes' do
         it 'creates a new book' do
+          book_attributes[:author_id] = create(:author).id
           post :create, params: { book: book_attributes }
           expect(response).to be_created
         end
@@ -81,7 +82,8 @@ RSpec.describe Api::V1::BooksController, type: :controller do
 
   describe 'strong params' do
     it do
-      book_params = [:isbn, :title, :description, :pages, :website, :published]
+      book_params = [:isbn, :title, :description, :pages, :website, :published,
+                     :author_id]
       should permit(*book_params)
         .for(:create, params: { book: book_attributes }).on(:book)
     end

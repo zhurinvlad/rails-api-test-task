@@ -37,5 +37,12 @@ RSpec.describe Api::V1::BooksController, type: :routing do
         route_to(controller: books_controller, action: 'destroy', id: book_id)
       )
     end
+
+    it do
+      expect(get: "#{books_path}/#{book_id}/reviews").to(
+        route_to(controller: 'api/v1/reviews', action: 'index',
+                 book_id: book_id)
+      )
+    end
   end
 end

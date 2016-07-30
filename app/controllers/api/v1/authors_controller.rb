@@ -1,7 +1,7 @@
 module Api
   module V1
     # v1/authors
-    class AuthorsController < ApplicationController
+    class AuthorsController < ApiController
       before_action :set_author, only: [:show, :update, :destroy]
 
       # GET v1/authors
@@ -45,7 +45,8 @@ module Api
 
       # Use callbacks to share common setup or constraints between actions.
       def set_author
-        @author = Author.find(params[:id])
+        id = params[:id] || params[:author_id]
+        @author = Author.find(id)
       end
 
       # Only allow a trusted parameter "white list" through.

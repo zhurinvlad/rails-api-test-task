@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "required": ["review"],
+  "properties": {
+    "review" : {
+      "type" : "object",
+      "required" : [
+        "id",
+        "text"
+      ],
+      "properties" : {
+        "id":   { "type" : "integer" },
+        "text": { "type" : "string" }
+      }
+    }
+  }
+}

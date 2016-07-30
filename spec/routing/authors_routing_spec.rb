@@ -5,7 +5,7 @@ RSpec.describe Api::V1::AuthorsController, type: :routing do
     let(:version)            { 'v1' }
     let(:authors_path)       { "#{version}/authors" }
     let(:authors_controller) { "api/#{authors_path}" }
-    let(:book_id)            { '1' }
+    let(:author_id)          { '1' }
 
     it { expect(get: authors_path).to be_routable }
 
@@ -15,26 +15,36 @@ RSpec.describe Api::V1::AuthorsController, type: :routing do
     end
 
     it do
-      expect(get: "#{authors_path}/#{book_id}").to(
-        route_to(controller: authors_controller, action: 'show', id: book_id)
+      expect(get: "#{authors_path}/#{author_id}").to(
+        route_to(controller: authors_controller, action: 'show', id: author_id)
       )
     end
 
     it do
-      expect(put: "#{authors_path}/#{book_id}").to(
-        route_to(controller: authors_controller, action: 'update', id: book_id)
+      expect(put: "#{authors_path}/#{author_id}").to(
+        route_to(controller: authors_controller, action: 'update',
+                 id: author_id)
       )
     end
 
     it do
-      expect(patch: "#{authors_path}/#{book_id}").to(
-        route_to(controller: authors_controller, action: 'update', id: book_id)
+      expect(patch: "#{authors_path}/#{author_id}").to(
+        route_to(controller: authors_controller, action: 'update',
+                 id: author_id)
       )
     end
 
     it do
-      expect(delete: "#{authors_path}/#{book_id}").to(
-        route_to(controller: authors_controller, action: 'destroy', id: book_id)
+      expect(delete: "#{authors_path}/#{author_id}").to(
+        route_to(controller: authors_controller, action: 'destroy',
+                 id: author_id)
+      )
+    end
+
+    it do
+      expect(get: "#{authors_path}/#{author_id}/books").to(
+        route_to(controller: 'api/v1/books', action: 'index',
+                 author_id: author_id)
       )
     end
   end

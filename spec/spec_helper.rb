@@ -72,6 +72,7 @@ RSpec.configure do |config|
   config.include Shoulda::Callback::Matchers::ActiveModel
   config.include ActiveSupport::Testing::TimeHelpers
   config.include Requests::JsonHelpers, type: :controller
+  config.include Requests::AuthHelpers, type: :controller
   config.include SerializerSpecHelper, type: :serializer
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

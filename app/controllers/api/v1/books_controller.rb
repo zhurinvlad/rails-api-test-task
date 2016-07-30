@@ -1,7 +1,7 @@
 module Api
   module V1
     # /v1/books
-    class BooksController < ApplicationController
+    class BooksController < ApiController
       before_action :set_book, only: [:show, :update, :destroy]
 
       # GET v1/books

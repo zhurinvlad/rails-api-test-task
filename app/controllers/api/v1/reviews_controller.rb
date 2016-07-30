@@ -1,42 +1,42 @@
 module Api
   module V1
-    # v1/reviews
+    # v1/books/:book_id/reviews
     class ReviewsController < ApiController
+      before_action :set_book
       before_action :set_review, only: [:show, :update, :destroy]
 
-      # GET /reviews
+      # GET v1/books/:book_id/reviews
       def index
-        @reviews = Review.all
+        @reviews = @book.reviews
 
         render json: @reviews
       end
 
-      # GET /reviews/1
+      # GET v1/books/:book_id/reviews/:id
       def show
         render json: @review
       end
 
-      # POST /reviews
+      # POST v1/books/:book_id/reviews
       def create
-        @review = Review.new(review_params)
+        @review = @book.reviews.new(review_params)
+        @review.user = @current_user
+        return render_errors @review unless @review.save
 
-        if @review.save
-          render json: @review, status: :created, location: @review
-        else
-          render json: @review.errors, status: :unprocessable_entity
-        end
+        render json: @review, status: :created,
+               location: v1_book_review_path(@review, @book.id)
       end
 
-      # PATCH/PUT /reviews/1
+      # PATCH/PUT v1/books/:book_id/reviews/:id
       def update
         if @review.update(review_params)
-          render json: @review
-        else
-          render json: @review.errors, status: :unprocessable_entity
+          @review.user = @current_user
+          return render json: @review
         end
+        render_errors @review
       end
 
-      # DELETE /reviews/1
+      # DELETE v1/books/:book_id/reviews/:id
       def destroy
         @review.destroy
       end
@@ -44,13 +44,17 @@ module Api
       private
 
       # Use callbacks to share common setup or constraints between actions.
+      def set_book
+        @book = Book.find(params[:book_id])
+      end
+
       def set_review
         @review = Review.find(params[:id])
       end
 
       # Only allow a trusted parameter "white list" through.
       def review_params
-        params.require(:review).permit(:text, :user_id, :book_id)
+        params.require(:review).permit(:text)
       end
     end
   end

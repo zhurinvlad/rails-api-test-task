@@ -18,21 +18,14 @@ module Api
       # POST v1/users
       def create
         @user = User.new(user_params)
-
-        if @user.save
-          render json: @user, status: :created, location: v1_user_path(@user)
-        else
-          render_errors @user
-        end
+        return render_errors @user unless @user.save
+        render json: @user, status: :created, location: v1_user_path(@user)
       end
 
       # PATCH/PUT v1/users/:id
       def update
-        if @user.update(user_params)
-          render json: @user
-        else
-          render_errors @user
-        end
+        return render json: @user if @user.update(user_params)
+        render_errors @user
       end
 
       # DELETE v1/users/:id

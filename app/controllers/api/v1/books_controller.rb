@@ -18,21 +18,14 @@ module Api
       # POST v1/books
       def create
         @book = Book.new(book_params)
-
-        if @book.save
-          render json: @book, status: :created, location: v1_book_path(@book)
-        else
-          render_errors @book
-        end
+        return render_errors @book unless @book.save
+        render json: @book, status: :created, location: v1_book_path(@book)
       end
 
       # PATCH/PUT v1/books/:id
       def update
-        if @book.update(book_params)
-          render json: @book
-        else
-          render_errors @book
-        end
+        return render json: @book if @book.update(book_params)
+        render_errors @book
       end
 
       # DELETE v1/books/:id

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::AuthorsController, type: :routing do
-  describe 'routing to users' do
+  describe 'routing to authors' do
     let(:version)            { 'v1' }
     let(:authors_path)       { "#{version}/authors" }
     let(:authors_controller) { "api/#{authors_path}" }
@@ -15,37 +15,33 @@ RSpec.describe Api::V1::AuthorsController, type: :routing do
     end
 
     it do
-      expect(get: "#{authors_path}/#{author_id}").to(
-        route_to(controller: authors_controller, action: 'show', id: author_id)
-      )
+      expect(get: "#{authors_path}/#{author_id}")
+        .to route_to controller: authors_controller, action: 'show',
+                     id: author_id
     end
 
     it do
-      expect(put: "#{authors_path}/#{author_id}").to(
-        route_to(controller: authors_controller, action: 'update',
-                 id: author_id)
-      )
+      expect(put: "#{authors_path}/#{author_id}")
+        .to route_to controller: authors_controller, action: 'update',
+                     id: author_id
     end
 
     it do
-      expect(patch: "#{authors_path}/#{author_id}").to(
-        route_to(controller: authors_controller, action: 'update',
-                 id: author_id)
-      )
+      expect(patch: "#{authors_path}/#{author_id}")
+        .to route_to controller: authors_controller, action: 'update',
+                     id: author_id
     end
 
     it do
-      expect(delete: "#{authors_path}/#{author_id}").to(
-        route_to(controller: authors_controller, action: 'destroy',
-                 id: author_id)
-      )
+      expect(delete: "#{authors_path}/#{author_id}")
+        .to route_to controller: authors_controller, action: 'destroy',
+                     id: author_id
     end
 
     it do
-      expect(get: "#{authors_path}/#{author_id}/books").to(
-        route_to(controller: 'api/v1/books', action: 'index',
-                 author_id: author_id)
-      )
+      expect(get: "#{authors_path}/#{author_id}/books")
+        .to route_to controller: 'api/v1/books', action: 'index',
+                     author_id: author_id
     end
   end
 end

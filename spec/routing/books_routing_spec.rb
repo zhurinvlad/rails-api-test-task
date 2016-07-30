@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::BooksController, type: :routing do
-  describe 'routing to users' do
+  describe 'routing to books' do
     let(:version)          { 'v1' }
     let(:books_path)       { "#{version}/books" }
     let(:books_controller) { "api/#{books_path}" }
@@ -15,34 +15,30 @@ RSpec.describe Api::V1::BooksController, type: :routing do
     end
 
     it do
-      expect(get: "#{books_path}/#{book_id}").to(
-        route_to(controller: books_controller, action: 'show', id: book_id)
-      )
+      expect(get: "#{books_path}/#{book_id}")
+        .to route_to controller: books_controller, action: 'show', id: book_id
     end
 
     it do
-      expect(put: "#{books_path}/#{book_id}").to(
-        route_to(controller: books_controller, action: 'update', id: book_id)
-      )
+      expect(put: "#{books_path}/#{book_id}")
+        .to route_to controller: books_controller, action: 'update', id: book_id
     end
 
     it do
-      expect(patch: "#{books_path}/#{book_id}").to(
-        route_to(controller: books_controller, action: 'update', id: book_id)
-      )
+      expect(patch: "#{books_path}/#{book_id}")
+        .to route_to controller: books_controller, action: 'update', id: book_id
     end
 
     it do
-      expect(delete: "#{books_path}/#{book_id}").to(
-        route_to(controller: books_controller, action: 'destroy', id: book_id)
-      )
+      expect(delete: "#{books_path}/#{book_id}")
+        .to route_to controller: books_controller, action: 'destroy',
+                     id: book_id
     end
 
     it do
-      expect(get: "#{books_path}/#{book_id}/reviews").to(
-        route_to(controller: 'api/v1/reviews', action: 'index',
-                 book_id: book_id)
-      )
+      expect(get: "#{books_path}/#{book_id}/reviews")
+        .to route_to controller: 'api/v1/reviews', action: 'index',
+                     book_id: book_id
     end
   end
 end

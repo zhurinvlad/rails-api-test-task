@@ -18,22 +18,16 @@ module Api
       # POST v1/authors
       def create
         @author = Author.new(author_params)
+        return render_errors @author unless @author.save
 
-        if @author.save
-          render json: @author, status: :created,
-                 location: v1_author_path(@author)
-        else
-          render_errors @author
-        end
+        render json: @author, status: :created,
+               location: v1_author_path(@author)
       end
 
       # PATCH/PUT v1/authors/:id
       def update
-        if @author.update(author_params)
-          render json: @author
-        else
-          render_errors @author
-        end
+        return render json: @author if @author.update(author_params)
+        render_errors @author
       end
 
       # DELETE v1/authors/:id

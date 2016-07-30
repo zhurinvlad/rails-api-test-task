@@ -15,27 +15,24 @@ RSpec.describe Api::V1::UsersController, type: :routing do
     end
 
     it do
-      expect(get: "#{users_path}/#{user_id}").to(
-        route_to(controller: users_controller, action: 'show', id: user_id)
-      )
+      expect(get: "#{users_path}/#{user_id}")
+        .to route_to controller: users_controller, action: 'show', id: user_id
     end
 
     it do
-      expect(put: "#{users_path}/#{user_id}").to(
-        route_to(controller: users_controller, action: 'update', id: user_id)
-      )
+      expect(put: "#{users_path}/#{user_id}")
+        .to route_to controller: users_controller, action: 'update', id: user_id
     end
 
     it do
-      expect(patch: "#{users_path}/#{user_id}").to(
-        route_to(controller: users_controller, action: 'update', id: user_id)
-      )
+      expect(patch: "#{users_path}/#{user_id}")
+        .to route_to controller: users_controller, action: 'update', id: user_id
     end
 
     it do
-      expect(delete: "#{users_path}/#{user_id}").to(
-        route_to(controller: users_controller, action: 'destroy', id: user_id)
-      )
+      expect(delete: "#{users_path}/#{user_id}")
+        .to route_to controller: users_controller, action: 'destroy',
+                     id: user_id
     end
   end
 end

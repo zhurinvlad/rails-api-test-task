@@ -6,11 +6,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   describe 'actions' do
     it 'GET v1/users' do
       create_list(:user, 10)
-
       get :index
-
-      json = JSON.parse(response.body)
-
       expect(response).to be_success
       expect(json['users'].length).to eq(10)
     end

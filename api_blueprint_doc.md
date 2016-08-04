@@ -121,7 +121,7 @@
             "user": {
                 "first_name": "Maria",
                 "last_name": "Krisanova",
-                "email": "mkrisanova@icloud.com",
+                "email": "mkrisanova@test.com",
                 "password": "pWdsN47qgZ",
                 "birthday": "1988-12-15",
                 "website": "https://google.com",
@@ -791,7 +791,3 @@
             X-Request-Id: 12315c69-c22e-46e3-8f66-bedda195deb2
             X-Runtime: 0.006183
             Cache-Control: no-cache
-
-
-
-

@@ -7,11 +7,7 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
   describe 'actions' do
     it 'GET v1/reviews' do
       create_list(:review, 10, book: book)
-
       get :index, params: { book_id: book.id }
-
-      json = JSON.parse(response.body)
-
       expect(response).to be_success
       expect(json['reviews'].length).to eq(10)
     end

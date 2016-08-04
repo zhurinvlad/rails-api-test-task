@@ -6,10 +6,7 @@ RSpec.describe Api::V1::AuthorsController, type: :controller do
   describe 'actions' do
     it 'GET v1/authors' do
       create_list(:author, 10)
-
       get :index
-
-      json = JSON.parse(response.body)
 
       expect(response).to be_success
       expect(json['authors'].length).to eq(10)

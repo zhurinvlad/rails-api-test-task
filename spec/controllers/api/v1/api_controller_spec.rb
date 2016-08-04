@@ -11,7 +11,6 @@ RSpec.describe Api::V1::ApiController, type: :controller do
           basic_auth user.email, user_password
           get :auth_token
           expect(response).to be_success
-          json = JSON.parse(response.body)
           expect(json['auth_token']).not_to be_nil
         end
       end
@@ -20,7 +19,6 @@ RSpec.describe Api::V1::ApiController, type: :controller do
         it 'returns errors' do
           get :auth_token
           expect(response).to be_unauthorized
-          json = JSON.parse(response.body)
           expect(json['errors']['access']).not_to be_nil
         end
       end
@@ -36,7 +34,6 @@ RSpec.describe Api::V1::ApiController, type: :controller do
           get :authorized_user
 
           expect(response).to be_success
-          json = JSON.parse(response.body)
           expect(json['user']).not_to be_nil
         end
       end
@@ -46,7 +43,6 @@ RSpec.describe Api::V1::ApiController, type: :controller do
           get :authorized_user
 
           expect(response).to be_unauthorized
-          json = JSON.parse(response.body)
           expect(json['errors']['access']).not_to be_nil
         end
       end

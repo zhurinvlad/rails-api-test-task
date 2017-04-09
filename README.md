@@ -2,19 +2,20 @@
 
 [![CircleCI](https://circleci.com/gh/akrisanov/bookshelf.svg?style=shield)](https://circleci.com/gh/akrisanov/bookshelf)
 
-Inspired from http://goodreads.com.
+## [Task Description]
+
+[Task.md](TASK.md)
+
+## API Specification
+
+[Blueprint](api_blueprint_doc.md)
+
 API for managing books, authors, and personal reviews:
 
 * Unauthorized user (Guest) can view books, authors, reviews, and users;
 * Authorized user can add/update/delete books and authors;
 * Authorized user can create reviews on the book and update/delete only his records.
 * Authorized Admin user can manage all entities.
-
-See the [task description](TASK.md).
-
-[API specification](api_blueprint_doc.md).
-
-Application deployed on Heroku: https://bookshelfapi.herokuapp.com
 
 ## Environment
 
@@ -33,12 +34,12 @@ RVM creates gemset based on `.ruby-version` and `.ruby-gemset`: `2.3.1@bookshelf
 
 ## Configuration
 
-## Database creation
+## Database Creation
 
 * `rails db:create`
 * `rails db:migrate`
 
-## Database initialization
+## Database Initialization
 
 * `rails db:seed`
 
@@ -76,6 +77,6 @@ E.g.: `/Users/akrisanov/.rvm/gems/ruby-2.3.1/wrappers/rubocop`.
 
 Use Bullet for N+1 queries detection.
 
-## Deployment instructions
+## Deployment Instructions
 
 * `git push heroku master`

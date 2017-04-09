@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/akrisanov/bookshelf.svg?style=shield)](https://circleci.com/gh/akrisanov/bookshelf)
 
-## [Task Description]
+## Task Description
 
 [Task.md](TASK.md)
 

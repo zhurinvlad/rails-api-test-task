@@ -1,6 +1,6 @@
 # README
 
-[![CircleCI](https://circleci.com/gh/akrisanov/bookshelf.svg?style=shield)](https://circleci.com/gh/akrisanov/bookshelf)
+[![CircleCI](https://circleci.com/gh/akrisanov/rails-api-test-task.svg?style=shield)](https://circleci.com/gh/akrisanov/rails-api-test-task)
 
 ## Task Description
 
